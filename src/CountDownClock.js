@@ -9,13 +9,12 @@ export default class CountDownClock extends Component {
       hr: new Date().getHours(),
       min: new Date().getMinutes(),
       sec: new Date().getSeconds(),
+      // hr:0,
+      // min:1,
+      // sec:4
+
     };
   }
-
-//   time = (e) => {
-//     return e.toLocaleTimeString("en-US");
-//   };
-
 
   tick = () => {
       this.setState({
@@ -24,21 +23,30 @@ export default class CountDownClock extends Component {
       if(this.state.sec<1){
         this.setState({
             min:this.state.min-1,
-            sec:this.state.sec+60
+            sec:this.state.sec+59
           })  
       }
       if(this.state.min<1){
         this.setState({
             hr:this.state.hr-1,
-            min:this.state.min+60,
-            sec:this.state.sec+60
+            min:this.state.min+59,
+            sec:this.state.sec+59
           })  
+      }
+      if(this.state.min===0 ){
+        this.setState({
+          hr:23,
+          min:59,
+          sec:59
+        })
+        // clearInterval(this.timer)
       }
 
   }
   
+
 clickhere=()=>{
-    setInterval(
+    this.timer = setInterval(
         this.tick
     , 1000);
 }
